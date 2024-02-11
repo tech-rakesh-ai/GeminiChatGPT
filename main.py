@@ -37,7 +37,7 @@ def main():
     )
 
     # Set app title
-    st.title("Gemini-Powered🚀 ChatGPT-Like App✨ ")
+    st.title("GeminiChatGPT🚀 App - Powered by Gemini✨")
 
     # Choose from available models
     available_models = ["Text Generation", "Image to Text Generation"]
