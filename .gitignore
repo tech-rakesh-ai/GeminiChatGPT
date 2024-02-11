@@ -1,0 +1,9 @@
+# .gitignore
+
+# Ignore Streamlit configuration files
+/.streamlit
+
+
+# Ignore virtual environments
+/venv
+/__pycache__
