@@ -1,5 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
+from streamlit_extras.let_it_rain import rain
 from PIL import Image
 import io
 
@@ -10,6 +11,13 @@ genai.configure(api_key=API_KEY)
 # Load the original model (can be moved outside the app for efficiency)
 text_model = genai.GenerativeModel('gemini-pro')
 vision_model = genai.GenerativeModel('gemini-pro-vision')
+
+# Set page title and favicon
+st.set_page_config(
+    page_title="Gemini-Powered chatGPT-Like App",
+    page_icon="✨",
+    layout="wide"
+)
 
 
 # Function to generate response
@@ -29,44 +37,47 @@ def generate_response(prompt, model, images=None):
 
 # Streamlit app
 def main():
-    # Set page title and favicon
-    st.set_page_config(
-        page_title="Gemini-Powered chatGPT-Like App",
-        page_icon="✨",
-        layout="wide"
-    )
-
     # Set app title
     st.title("GeminiChatGPT🚀 App - Powered by Gemini✨")
 
     # Choose from available models
-    available_models = ["Text Generation", "Image to Text Generation"]
-    model_name = st.sidebar.selectbox("Choose Model", available_models)
+    available_models = ["📑 Text Generation", "🚀 Image to Text Generation"]
+    model_name = st.sidebar.selectbox("🏛️ Choose Model", available_models)
 
-    if model_name == "Text Generation":
-        model = text_model
-        # Input prompt from user
-        prompt = st.text_input("Enter your prompt:", placeholder="Ask me anything...")
-        images = None
-    elif model_name == "Image to Text Generation":
-        model = vision_model
-        # Input prompt from user
-        prompt = st.text_area("Enter your text prompt:", placeholder="Write a short, engaging blog post...")
-        # Upload image option
-        images = st.file_uploader("Upload image", type=["jpg", "jpeg", "png"])
+    # Container for main content
+    with st.container():
+        # Call the rain function
+        rain(
+            emoji="🎈",
+            font_size=54,
+            falling_speed=5,
+            animation_length=5,
+        )
 
-    if st.button("Generate Response"):
-        if prompt:
-            # Display generated response
-            response, image = generate_response(prompt, model, images)
-            if response:
-                st.markdown(f"**Response:**  \n{response}")
-                if image:
-                    st.image(image, caption="Your Provided Image", width=300, use_column_width=False)
+        if model_name == "📑 Text Generation":
+            model = text_model
+            # Input prompt from user
+            prompt = st.text_input("Enter your prompt:", placeholder="Ask me anything...")
+            images = None
+        elif model_name == "🚀 Image to Text Generation":
+            model = vision_model
+            # Input prompt from user
+            prompt = st.text_area("Enter your text prompt:", placeholder="Write a short, engaging blog post...")
+            # Upload image option
+            images = st.file_uploader("Upload image", type=["jpg", "jpeg", "png"])
+
+        if st.button("Generate Response"):
+            if prompt:
+                # Display generated response
+                response, image = generate_response(prompt, model, images)
+                if response:
+                    st.markdown(f"**Response:**  \n{response}")
+                    if image:
+                        st.image(image, caption="Your Provided Image", width=300, use_column_width=False)
+                else:
+                    st.info("Failed to generate a response. Please check your input and try again.")
             else:
-                st.info("Failed to generate a response. Please check your input and try again.")
-        else:
-            st.warning("Please check your input and try again.")
+                st.warning("Please check your input and try again.")
 
     # Sidebar with additional features
     st.sidebar.header("About this app")

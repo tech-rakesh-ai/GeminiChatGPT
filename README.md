@@ -36,7 +36,7 @@ text and images.
 4. Run the app:
 
    ```bash
-   streamlit run main.py
+   streamlit run app.py
    ```
 
 ## Usage
