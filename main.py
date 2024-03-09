@@ -93,7 +93,7 @@ def main():
     st.sidebar.write(
         "Developed🚀 by **Rakesh Kumar**\n"
         "\n Feel free to connect and share your feedback(✨)"
-        "\n on LinkedIn: [Rakesh Kumar](https://www.linkedin.com/in/m-rakesh-kr/)"
+        "\n on LinkedIn: [Rakesh Kumar](https://www.linkedin.com/in/tech-rakesh-ai/)"
     )
 
     # Add some styling to the sidebar
